@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Case Sensitivity Documentation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #eef1f7;
+            color: #2c3e50;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 34px;
+            color: #1e2a78;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        section {
+            margin-bottom: 45px;
+        }
+
+        section h2 {
+            font-size: 24px;
+            color: #1e2a78;
+            border-left: 6px solid #1e2a78;
+            padding-left: 14px;
+            margin-bottom: 25px;
+        }
+
+        .program-box {
+            border: 1px solid #dfe4ea;
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 25px;
+            background: #fafbff;
+        }
+
+        .program-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .label-correct {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .label-incorrect {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        pre {
+            background-color: #0f172a;
+            color: #e5e7eb;
+            width: 50%;
+            margin: 10px auto;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        ul.reason-list {
+            padding-left: 25px;
+        }
+
+        ul.reason-list li {
+            margin-bottom: 14px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>JavaScript Case Sensitivity</h1>
+        <p>Correct & Incorrect Syntax Examples with Explanation</p>
+    </header>
+
+    <section>
+        <h2>1. Syntax Demonstration Programs</h2>
+
+        <div class="program-box">
+            <div class="program-title">Program 1 — Variable Declaration</div>
+            <p class="label-correct">Correct Syntax</p>
+            <pre>
+let age = 20;
+console.log(age);
+            </pre>
+
+            <p class="label-incorrect">Incorrect Syntax</p>
+            <pre>
+let = age 20;
+console.log(age);
+            </pre>
+        </div>
+
+        <div class="program-box">
+            <div class="program-title">Program 2 — Case Sensitivity in Variables</div>
+            <p class="label-correct">Correct Syntax</p>
+            <pre>
+let name = "Ram";
+console.log(name);
+            </pre>
+
+            <p class="label-incorrect">Incorrect Syntax</p>
+            <pre>
+let name = "Ram";
+console.log(Name);
+            </pre>
+        </div>
+
+        <div class="program-box">
+            <div class="program-title">Program 3 — Function Name Case</div>
+            <p class="label-correct">Correct Syntax</p>
+            <pre>
+function greet() {
+    console.log("Hello");
+}
+
+greet();
+            </pre>
+
+            <p class="label-incorrect">Incorrect Syntax</p>
+            <pre>
+function greet() {
+    console.log("Hello");
+}
+
+Greet();
+            </pre>
+        </div>
+
+        <div class="program-box">
+            <div class="program-title">Program 4 — Statement Termination</div>
+            <p class="label-correct">Correct Syntax</p>
+            <pre>
+let x = 10;
+let y = 20;
+console.log(x + y);
+            </pre>
+
+            <p class="label-incorrect">Incorrect Syntax</p>
+            <pre>
+let x = 10
+let y = 20
+console.log(x + y)
+            </pre>
+        </div>
+
+        <div class="program-box">
+            <div class="program-title">Program 5 — Keyword Case Sensitivity</div>
+            <p class="label-correct">Correct Syntax</p>
+            <pre>
+if (10 > 5) {
+    console.log("True");
+}
+            </pre>
+
+            <p class="label-incorrect">Incorrect Syntax</p>
+            <pre>
+If (10 > 5) {
+    console.log("True");
+}
+            </pre>
+        </div>
+
+    </section>
+
+    <section>
+        <h2>2. Reasons Why JavaScript Is Case-Sensitive</h2>
+
+        <ul class="reason-list">
+            <li><strong>Improved performance:</strong> Exact matching allows faster variable and function lookup.</li>
+            <li><strong>Industry consistency:</strong> JavaScript follows conventions used by C, C++, and Java.</li>
+            <li><strong>Error prevention:</strong> Differentiates between identifiers like <code>age</code> and <code>Age</code>.</li>
+            <li><strong>Standard naming conventions:</strong> Enables camelCase, PascalCase, and constant naming styles.</li>
+        </ul>
+    </section>
+
+    <footer>
+        © JavaScript Case Sensitivity
+    </footer>
+
+</div>
+
+</body>
+</html>

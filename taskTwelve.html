@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Scope</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    background: #fdfaf6;
+    color: #1e293b;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 80px 20px;
+    line-height: 1.6;
+}
+
+.container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+}
+
+header { 
+    text-align: center; 
+    margin-bottom: 80px; 
+}
+header h1 { 
+    font-size: 3.5rem; 
+    font-weight: 800; 
+    color: #6366f1; 
+    margin-bottom: 10px;
+ }
+header p { 
+    color: #64748b; 
+    font-size: 1.2rem; 
+}
+
+.scope-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
+    margin-bottom: 60px;
+}
+
+.scope-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-top: 8px solid #6366f1; 
+    border-radius: 40px; 
+    padding: 40px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+.scope-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+    border-top-color: #4f46e5; 
+}
+
+.icon { 
+    font-size: 2.8rem; 
+    margin-bottom: 20px; 
+    display: block; 
+}
+h2 { 
+    font-size: 1.8rem;
+    margin-bottom: 15px; 
+    color: #1e293b; 
+}
+p { 
+    color: #475569; 
+    margin-bottom: 25px; 
+}
+
+pre {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 24px;
+    border: 1px solid #edf2f7;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.kw { color: #4f46e5; font-weight: 600; }
+.str { color: #0891b2; }
+
+.cheat-sheet {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-top: 8px solid #6366f1;
+    border-radius: 40px;
+    padding: 50px;
+    margin-top: 40px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04);
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse;
+ }
+th { 
+    text-align: left; 
+    padding: 18px; 
+    color: #6366f1; 
+    font-size: 0.85rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px;
+    border-bottom: 2px solid #f1f5f9;
+}
+td { 
+    padding: 18px; 
+    border-bottom: 1px solid #f1f5f9; 
+    color: #334155; 
+}
+tr:last-child td { border-bottom: none; }
+
+@media (max-width: 768px) {
+    header h1 { font-size: 2.5rem; }
+    .scope-card, .cheat-sheet { border-radius: 30px; padding: 30px; }
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Javascript Scope</h1>
+        <p>Mastering variable visibility and memory lifespans</p>
+    </header>
+
+    
+
+    <div class="scope-grid">
+        <div class="scope-card">
+            <span class="icon">🌐</span>
+            <h2>Global Scope</h2>
+            <p>The highest level. Variables declared here are accessible from any function, block, or nested logic.</p>
+            <pre><code><span class="kw">const</span> zone = <span class="str">"Earth"</span>;
+
+<span class="kw">function</span> check() {
+    console.log(zone); <span style="color:#64748b">// Works!</span>
+}</code></pre>
+        </div>
+
+        <div class="scope-card">
+            <span class="icon">🔒</span>
+            <h2>Function Scope</h2>
+            <p>Each function creates its own sandbox. Variables defined inside cannot leak to the outside world.</p>
+            <pre><code><span class="kw">function</span> vault() {
+    <span class="kw">let</span> code = <span class="str">"9901"</span>;
+}
+
+<span style="color:#64748b">// console.log(code); // Error</span></code></pre>
+        </div>
+
+        <div class="scope-card">
+            <span class="icon">📦</span>
+            <h2>Block Scope</h2>
+            <p>The <code>{ }</code> boundaries. Restricted to loops and if-statements using <code>let</code> and <code>const</code>.</p>
+            <pre><code><span class="kw">if</span> (true) {
+    <span class="kw">let</span> item = <span class="str">"Shield"</span>;
+    <span class="kw">var</span> leak = <span class="str">"Water"</span>;
+}
+<span style="color:#64748b">// console.log(item); // Error</span></code></pre>
+        </div>
+    </div>
+
+    <div class="cheat-sheet">
+        <h2>Scope Cheat Sheet</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Keyword</th>
+                    <th>Scope Type</th>
+                    <th>Re-assignable</th>
+                    <th>Hoisting</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>var</strong></td>
+                    <td>Function</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td><strong>let</strong></td>
+                    <td>Block</td>
+                    <td>Yes</td>
+                    <td>No </td>
+                </tr>
+                <tr>
+                    <td><strong>const</strong></td>
+                    <td>Block</td>
+                    <td>No</td>
+                    <td>No</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            background-size: cover;
+            color: white;
+        }
+
+        form {
+            width: 420px;
+            height: 420px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        input, button {
+            width: 90%;
+            padding: 14px;
+            margin: 18px 0;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        input::placeholder {
+            color: #eee;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            width: 60%;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="" class="form" id="form">
+        <h1>Login</h1>
+        <input type="text" placeholder="Email ID" id="email">
+        <input type="password" id="password" placeholder="Enter password" maxlength="15">        
+        <button id="loginBtn">Login</button>
+    </form>
+
+    <script>
+        const loginButton = document.getElementById("loginBtn");
+        const mail = document.getElementById("email");
+        const password = document.getElementById("password"); 
+
+        loginButton.addEventListener("click", () => {
+            if(mail.value !== "" && password.value !== ""){
+                alert("You have logged in.");
+                console.log("You have logged in.");
+                document.write("<p>It's just simple login form. I made it for practice.</p>")
+            }
+            else{
+                alert("Fill out given field to login.");
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Iteration Masterclass</title>
+ <style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    line-height: 1.7;
+    padding: 80px 20px;
+  }
+
+  .container {
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #0f172a;
+    margin-bottom: 15px;
+  }
+
+  .subtitle {
+    color: #475569;
+    font-size: 1.2rem;
+    font-weight: 500;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .box {
+    background: #ffffff;
+    padding: 40px 48px;
+    border-radius: 32px ; 
+    margin-bottom: 40px;
+    border-left: 6px solid #1e293b; 
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.04);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .box:hover {
+    transform: translateX(8px);
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+    border-left-color: #6366f1; 
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: #475569;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+  }
+
+  b {
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  code-wrapper {
+    display: block;
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+
+  .badge {
+    display: inline-flex;
+    padding: 6px 14px;
+    background: #f1f5f9;
+    color: #0284c7;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 10px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .warning {
+    background: #fff7ed;
+    color: #c2410c;
+    border-color: #fed7aa;
+  }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    .box { padding: 30px; border-radius: 0 20px 20px 0; }
+    body { padding: 40px 15px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>🔁 JavaScript Iteration</h1>
+      <p class="subtitle">A comprehensive guide to modern array and object traversal.</p>
+    </header>
+
+    <div class="box">
+      <h2>What is Iteration?</h2>
+      <p>
+        Iteration is the process of executing a block of code repeatedly for each item in a collection. 
+        It is the foundation of data processing in modern web development.
+      </p>
+
+      
+
+      <code-wrapper>
+        <pre>let numbers = [1, 2, 3, 4];</pre>
+      </code-wrapper>
+    </div>
+
+    <div class="box">
+      <h2>1. forEach()</h2>
+      <p>
+        Ideal for executing <b>side effects</b> (like updating the DOM or logging data). 
+        It does not create a new array or return a value.
+      </p>
+
+      <code-wrapper>
+        <pre>let nums = [1, 2, 3];
+
+nums.forEach((num) => {
+  console.log("Current item:", num);
+});</pre>
+      </code-wrapper>
+      <span class="badge">Best for: Logging & DOM Updates</span>
+    </div>
+
+    <div class="box">
+      <h2>2. for...of</h2>
+      <p>
+        The most readable way to loop through <b>iterable objects</b> (Arrays, Strings, Sets). 
+        It provides a clean syntax without needing a callback function.
+      </p>
+
+      <code-wrapper>
+        <pre>let fruits = ["apple", "banana", "mango"];
+
+for (let fruit of fruits) {
+  console.log(fruit);
+}</pre>
+      </code-wrapper>
+      <span class="badge">Best for: Readability</span>
+    </div>
+
+    <div class="box">
+      <h2>3. for...in</h2>
+      <p>
+        Designed specifically for <b>objects</b>. It iterates over the enumerable property keys 
+        rather than the values themselves.
+      </p>
+
+      <code-wrapper>
+        <pre>let user = {
+  name: "Chaitanya",
+  age: 22,
+  city: "Hyderabad"
+};
+
+for (let key in user) {
+  console.log(`${key}: ${user[key]}`);
+}</pre>
+      </code-wrapper>
+      <span class="badge warning">Note: Avoid using for...in with Arrays</span>
+    </div>
+
+    <div class="box">
+      <h2>4. map()</h2>
+      <p>
+        A powerful <b>transformation tool</b>. It creates a brand-new array by applying 
+        a function to every element of the original array.
+      </p>
+
+      
+
+      <code-wrapper>
+        <pre>let numbers = [1, 2, 3, 4];
+
+let doubled = numbers.map(num => num * 2);
+
+console.log(doubled); // [2, 4, 6, 8]</pre>
+      </code-wrapper>
+      <span class="badge">Best for: Data Transformation</span>
+    </div>
+
+    <div class="box">
+      <h2>5. filter()</h2>
+      <p>
+        The primary tool for <b>data selection</b>. It returns a new array containing only 
+        the elements that pass a specific logical test.
+      </p>
+
+      
+
+      <code-wrapper>
+        <pre>let numbers = [1, 2, 3, 4, 5, 6];
+
+let evenNumbers = numbers.filter(num => num % 2 === 0);
+
+console.log(evenNumbers); // [2, 4, 6]</pre>
+      </code-wrapper>
+      <span class="badge">Best for: Searching & Filtering</span>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Button</title>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: #ffdd57;
+            color: #333;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ffe97f;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message {
+            margin-top: 25px;
+            font-size: 22px;
+            display: none;
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>✨ Click the Magic Button ✨</h1>
+
+    <button id="btn">Click me to reveal a secret 😄</button>
+
+    <div class="message" id="msg">
+        🎉 Boom! You unlocked the magic zone 😎🔥
+    </div>
+
+    <script>
+        const btn = document.getElementById("btn");
+        const msg = document.getElementById("msg");
+
+        btn.addEventListener("click", () => {
+            alert("🎉 Boom! You discovered the secret message!");
+            msg.style.display = "block";
+            btn.innerHTML = "💥 Magic Activated!";
+            console.log("🚀 User entered the magic zone!");
+            
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Numbers & Number Methods</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f8fafc; 
+    color: #1e293b;     
+    line-height: 1.6;
+}
+
+header {
+    background: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: -0.02em;
+}
+
+header p {
+    margin-top: 12px;
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+main {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+section {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 35px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+h2::before {
+    content: "";
+    width: 4px;
+    height: 20px;
+    background: #4f46e5; 
+    margin-right: 12px;
+    border-radius: 4px;
+}
+
+p, li {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+code {
+    display: block;
+    background: #0f172a; 
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #cbd5e1;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 25px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+}
+
+th {
+    background: #f1f5f9;
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    border-top: 1px solid #e2e8f0;
+    background: #ffffff;
+}
+
+.container {
+    background: #4f46e5; 
+    color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    margin-top: 50px;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.2);
+}
+
+.container h1 { 
+    font-size: 1.8rem;
+     margin-bottom: 5px;
+ }
+.container p { 
+    color: #e0e7ff;
+     margin-bottom: 25px;
+ }
+
+input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: 2px solid transparent;
+}
+
+input[type="text"]:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+button {
+    background: #10b981; 
+    color: #ffffff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.result {
+    margin-top: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+    font-family: monospace;
+    font-size: 0.95rem;
+    line-height: 2;
+}
+
+.result span {
+    font-weight: bold;
+    color: #a5b4fc;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    font-size: 0.85rem;
+    border-top: 1px solid #e2e8f0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>JavaScript Numbers & Number Methods</h1>
+    <p>Complete beginner-friendly explanation with examples</p>
+</header>
+
+<main>
+
+<section>
+    <h2>What is a Number?</h2>
+    <p>
+        In JavaScript, <strong>Number</strong> is a data type used to store numeric values.
+        JavaScript does not have separate integer or float types — all numbers are treated as one type.
+    </p>
+
+<code>
+    <pre>
+let age = 20;
+let price = 99.99;
+let temperature = -5;
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>Important Concept</h2>
+    <p>
+        When input is taken from the user using <strong>input</strong> or <strong>prompt</strong>,
+        JavaScript stores the value as a <strong>string</strong>.
+    </p>
+
+<code>
+    <pre>
+let num = "10";
+
+console.log(num + 5); // 105 (string addition)
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>Common Number Methods</h2>
+
+
+<code>
+    <pre>
+let num = 10.5678;
+
+num.toFixed(2);          // "10.57"
+num.toString();          // "10"
+isNaN("abc");            // true
+Number.isInteger(10);    // true
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>Math Methods</h2>
+
+<code><pre>
+Math.round(4.6);   // 5
+Math.floor(4.9);   // 4
+Math.ceil(4.1);    // 5
+Math.random();     // 0 to 1
+Math.max(10,20);   // 20
+Math.min(5,2);     // 2
+</pre>
+</code>
+</section>
+
+<section>
+     <h2>parseInt()</h2>
+    <p>
+        Converts a value into a <strong>whole number (integer)</strong>.
+    </p>
+
+<code>
+    <pre>
+parseInt("10");      // 10
+parseInt("10.5");    // 10
+parseInt("25px");    // 25
+parseInt("abc");     // NaN
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>parseFloat()</h2>
+    <p>
+        Converts a value into a <strong>decimal number</strong>.
+    </p>
+
+<code>
+    <pre>
+parseFloat("10.5");   
+parseFloat("25.75px");
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>Number()</h2>
+    <p>
+        Converts a value strictly into a number. If the value contains text,
+        it returns <strong>NaN</strong>.
+    </p>
+
+<code>
+    <pre>
+Number("10");     // 10
+Number("10.5");   // 10.5
+Number("10px");   // NaN
+</pre>
+</code>
+</section>
+
+<section>
+    <h2>Difference Between Conversions</h2>
+
+<table>
+<tr>
+    <th>Value</th>
+    <th>parseInt</th>
+    <th>parseFloat</th>
+    <th>Number</th>
+</tr>
+<tr>
+    <td>"10"</td>
+    <td>10</td>
+    <td>10</td>
+    <td>10</td>
+</tr>
+<tr>
+    <td>"10.8"</td>
+    <td>10</td>
+    <td>10.8</td>
+    <td>10.8</td>
+</tr>
+<tr>
+    <td>"10px"</td>
+    <td>10</td>
+    <td>10</td>
+    <td>NaN</td>
+</tr>
+</table>
+
+</section>
+
+
+<section>
+    <h2>Real Example</h2>
+
+<code>
+    <pre>
+let a = "10";
+let b = "20";
+
+let sum = parseInt(a) + parseInt(b);
+
+console.log(sum); // 30
+</pre>
+</code>
+</section>
+
+<div class="container">
+    <h1>Number Utility Tool</h1>
+    <p>Analyze any number using JavaScript methods</p>
+
+    <input type="text" id="num" placeholder="Enter a number">
+
+    <button id="analyzeNumber">Analyze Number</button>
+
+    <div class="result" id="output">Your output goes here : </div>
+</div>
+
+</main>
+
+<footer>
+    © JavaScript Numbers & Number Methods
+</footer>
+<script>
+    const analyzeNumber = document.getElementById("analyzeNumber");
+    analyzeNumber.addEventListener("click", calculate);
+function calculate(){
+    let value = document.getElementById("num").value;
+    let intVal = parseInt(value);
+    let floatVal = parseFloat(value);
+    let numVal = Number(value);
+    let output = document.getElementById("output");
+
+    if(value === ""){
+        output.innerHTML = "⚠ Please enter a number";
+        return;
+    }
+else{
+    output.innerHTML = `
+        <span>Original Input:</span> ${value}<br>
+        <span>parseInt():</span> ${intVal}<br>
+        <span>parseFloat():</span> ${floatVal}<br>
+        <span>Number():</span> ${numVal}<br>
+        <span>Rounded:</span> ${Math.round(floatVal)}<br>
+        <span>Floor:</span> ${Math.floor(floatVal)}<br>
+        <span>Ceil:</span> ${Math.ceil(floatVal)}<br>
+        <span>Is Integer:</span> ${Number.isInteger(numVal)}<br>
+        <span>Fixed (2 decimals):</span> ${!isNaN(numVal) ? numVal.toFixed(2) : "Invalid"}<br>
+    `;}
+}
+</script>
+</body>
+</html>

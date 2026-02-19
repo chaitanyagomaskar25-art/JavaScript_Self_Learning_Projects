@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Operators</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef2f7;
+            color: #1f2937;
+            padding: 40px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: #ffffff;
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        header h1 {
+            font-size: 38px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #475569;
+            font-size: 16px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        section h2 {
+            font-size: 26px;
+            color: #1e293b;
+            border-left: 6px solid #1e293b;
+            padding-left: 15px;
+            margin-bottom: 18px;
+        }
+
+        section p {
+            margin-bottom: 18px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            min-width: 700px;
+        }
+
+        th {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px;
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+            font-size: 14.5px;
+            text-align: center;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        pre {
+            background: #020617;
+            color: #e5e7eb;
+            padding: 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 13.5px;
+            margin-top: 10px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-left: 5px solid #1e293b;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>JavaScript Operators</h1>
+        <p>Complete Guide with Examples and Outputs</p>
+    </header>
+
+    <section>
+        <p><strong>Operator:</strong> An operator is a special symbol used to perform operations on one or more operands (values).</p>
+        <p><strong>Types of Operators in JavaScript:</strong></p>
+    </section>
+
+    <section>
+        <h2>1. Arithmetic Operators</h2>
+        <p>Used to perform mathematical calculations.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+                <tr><td>+</td><td>Addition</td><td>5 + 3</td><td>8</td></tr>
+                <tr><td>-</td><td>Subtraction</td><td>10 - 4</td><td>6</td></tr>
+                <tr><td>*</td><td>Multiplication</td><td>6 × 3</td><td>18</td></tr>
+                <tr><td>/</td><td>Division</td><td>12 / 3</td><td>4</td></tr>
+                <tr><td>%</td><td>Modulus</td><td>10 % 3</td><td>1</td></tr>
+                <tr><td>**</td><td>Exponentiation</td><td>2 ** 3</td><td>8</td></tr>
+            </table>
+        </div>
+
+        <pre>
+let a = 10;
+let b = 3;
+
+console.log(a + b);
+console.log(a % b);
+console.log(a ** b);
+        </pre>
+    </section>
+
+    <section>
+        <h2>2. Assignment Operators</h2>
+        <p>Used to assign values to variables.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>
+                <tr><td>=</td><td>Assign</td><td>x = 5</td></tr>
+                <tr><td>+=</td><td>Add & assign</td><td>x += 3</td></tr>
+                <tr><td>-=</td><td>Subtract & assign</td><td>x -= 2</td></tr>
+                <tr><td>*=</td><td>Multiply & assign</td><td>x *= 2</td></tr>
+                <tr><td>/=</td><td>Divide & assign</td><td>x /= 5</td></tr>
+                <tr><td>%=</td><td>Modulus & assign</td><td>x %= 3</td></tr>
+            </table>
+        </div>
+
+        <pre>
+let x = 10;
+x += 5;
+x *= 2;
+console.log(x);
+        </pre>
+    </section>
+
+    <section>
+        <h2>3. Comparison Operators</h2>
+        <p>Used to compare values and return <code>true</code> or <code>false</code>.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <tr><th>Operator</th><th>Description</th><th>Example</th><th>Output</th></tr>
+                <tr><td>==</td><td>Equal (value)</td><td>5 == '5'</td><td>true</td></tr>
+                <tr><td>===</td><td>Strict equal</td><td>5 === '5'</td><td>false</td></tr>
+                <tr><td>!=</td><td>Not equal</td><td>5 != 3</td><td>true</td></tr>
+                <tr><td>!==</td><td>Strict not equal</td><td>5 !== '5'</td><td>true</td></tr>
+                <tr><td>></td><td>Greater than</td><td>10 > 5</td><td>true</td></tr>
+                <tr><td><</td><td>Less than</td><td>5 < 3</td><td>false</td></tr>
+                <tr><td>>=</td><td>Greater or equal</td><td>5 >= 5</td><td>true</td></tr>
+                <tr><td><=</td><td>Less or equal</td><td>4 <= 5</td><td>true</td></tr>
+            </table>
+        </div>
+
+        <pre>
+let a = 10;
+let b = "10";
+
+console.log(a == b);
+console.log(a === b);
+        </pre>
+    </section>
+
+    <section>
+        <h2>4. Logical Operators</h2>
+        <p>Used to combine multiple conditions.</p>
+
+        <div class="table-wrapper">
+            <table>
+                <tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Output</th></tr>
+                <tr><td>&&</td><td>AND</td><td>true && false</td><td>false</td></tr>
+                <tr><td>||</td><td>OR</td><td>true || false</td><td>true</td></tr>
+                <tr><td>!</td><td>NOT</td><td>!true</td><td>false</td></tr>
+            </table>
+        </div>
+
+        <pre>
+let x = 10;
+let y = 5;
+
+console.log(x > 0 && y > 0);
+console.log(x > 0 || y < 0);
+console.log(!(x > 0));
+        </pre>
+    </section>
+
+    <section>
+        <h2>5. Ternary Operator</h2>
+        <p>Short-hand alternative of <code>if-else</code>.</p>
+
+        <pre>
+condition ? value_if_true : value_if_false
+        </pre>
+
+        <pre>
+let age = 18;
+let result = age >= 18 ? "Adult" : "Minor";
+console.log(result);
+        </pre>
+
+        <div class="note">
+            ✔ If condition is true → first value is returned <br>
+            ✖ If false → second value is returned
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

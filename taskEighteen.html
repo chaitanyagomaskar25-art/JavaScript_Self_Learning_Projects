@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    * {
+        box-sizing: border-box;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #f8fafc; /* Eye-comfort off-white */
+        background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px);
+        background-size: 30px 30px; /* Subtle architectural grid */
+        color: #1e293b;
+        margin: 0;
+        padding: 60px 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        max-width: 800px;
+        width: 100%;
+        background: #ffffff;
+        padding: 45px;
+        border-radius: 24px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #edf2f7;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 35px;
+        text-align: center;
+        letter-spacing: -0.025em;
+    }
+
+    /* Inputs Styling */
+    input {
+        width: 100%;
+        padding: 14px 18px;
+        margin: 8px 0;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fdfdfd;
+        font-family: inherit;
+        font-size: 14px;
+        color: #334155;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #6366f1;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        transform: translateY(-1px);
+    }
+
+    input::placeholder {
+        color: #94a3b8;
+    }
+
+    /* Buttons Styling */
+    button {
+        font-family: inherit;
+        font-weight: 600;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .add {
+        background: #4f46e5;
+        color: white;
+        width: 100%;
+        padding: 16px;
+        margin-top: 15px;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    }
+
+    .add:hover {
+        background: #4338ca;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(79, 70, 229, 0.35);
+    }
+
+    .update {
+        background: #0ea5e9;
+        color: white;
+        width: 100%;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+    }
+
+    /* Table Experience */
+    table {
+        width: 100%;
+        margin-top: 45px;
+        border-collapse: collapse;
+        border: none;
+    }
+
+    th {
+        background: #f1f5f9;
+        color: #475569;
+        font-weight: 700;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 16px;
+        border: none;
+    }
+
+    th:first-child { border-radius: 12px 0 0 12px; }
+    th:last-child { border-radius: 0 12px 12px 0; }
+
+    td {
+        padding: 20px 16px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #475569;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    tr:hover td {
+        background-color: #f8fafc;
+        color: #0f172a;
+    }
+
+    /* Status Badges */
+    .pass {
+        background: #dcfce7;
+        color: #15803d;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .fail {
+        background: #fee2e2;
+        color: #b91c1c;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    /* Table Action Buttons */
+    .edit {
+        background: #eef2ff;
+        color: #4f46e5;
+        padding: 8px 14px;
+    }
+
+    .edit:hover { background: #e0e7ff; }
+
+    .delete {
+        background: #fff1f2;
+        color: #e11d48;
+        padding: 8px 14px;
+    }
+
+    .delete:hover { background: #ffe4e6; }
+
+    /* Custom Number Input Hiding arrows for clean UI */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🎓 Student Management System</h2>
+
+    <input type="text" id="name" placeholder="Student Name">
+
+    <input type="number" id="s1" placeholder="Math Marks">
+    <input type="number" id="s2" placeholder="Science Marks">
+    <input type="number" id="s3" placeholder="English Marks">
+    <input type="number" id="s4" placeholder="Computer Marks">
+    <input type="number" id="s5" placeholder="Social Marks">
+
+    <button id="mainBtn" class="add" onclick="addStudent()">Add Student</button>
+
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Total</th>
+            <th>%</th>
+            <th>Grade</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+let editRow = null;
+
+function addStudent() {
+
+    let name = document.getElementById("name").value;
+    let s1 = Number(document.getElementById("s1").value);
+    let s2 = Number(document.getElementById("s2").value);
+    let s3 = Number(document.getElementById("s3").value);
+    let s4 = Number(document.getElementById("s4").value);
+    let s5 = Number(document.getElementById("s5").value);
+
+    if (!name || s1 === 0 || s2 === 0 || s3 === 0 || s4 === 0 || s5 === 0) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let total = s1 + s2 + s3 + s4 + s5;
+    let percent = (total / 500) * 100;
+
+    let grade = "";
+    if (percent >= 90) grade = "A+";
+    else if (percent >= 80) grade = "A";
+    else if (percent >= 70) grade = "B";
+    else if (percent >= 60) grade = "C";
+    else if (percent >= 35) grade = "D";
+    else grade = "F";
+
+    let status = percent >= 35
+        ? "<span class='pass'>PASS</span>"
+        : "<span class='fail'>FAIL</span>";
+
+    if (editRow === null) {
+        // ADD MODE
+        let table = document.getElementById("table");
+        let row = table.insertRow(-1);
+
+        row.innerHTML = `
+            <td>${name}</td>
+            <td>${total}</td>
+            <td>${percent.toFixed(2)}</td>
+            <td>${grade}</td>
+            <td>${status}</td>
+            <td>
+                <button class="edit" onclick="editStudent(this)">Edit</button>
+                <button class="delete" onclick="removeStudent(this)">Remove</button>
+            </td>
+        `;
+    } else {
+        // UPDATE MODE
+        editRow.cells[0].innerText = name;
+        editRow.cells[1].innerText = total;
+        editRow.cells[2].innerText = percent.toFixed(2);
+        editRow.cells[3].innerText = grade;
+        editRow.cells[4].innerHTML = status;
+
+        editRow = null;
+        document.getElementById("mainBtn").textContent = "Add Student";
+        document.getElementById("mainBtn").className = "add";
+    }
+
+    clearInputs();
+}
+
+function editStudent(btn) {
+    editRow = btn.parentElement.parentElement;
+
+    document.getElementById("name").value = editRow.cells[0].innerText;
+    document.getElementById("s1").value = "";
+    document.getElementById("s2").value = "";
+    document.getElementById("s3").value = "";
+    document.getElementById("s4").value = "";
+    document.getElementById("s5").value = "";
+
+    document.getElementById("mainBtn").textContent = "Update Student";
+    document.getElementById("mainBtn").className = "update";
+}
+
+function removeStudent(btn) {
+    btn.parentElement.parentElement.remove();
+}
+
+function clearInputs() {
+    document.getElementById("name").value = "";
+    document.getElementById("s1").value = "";
+    document.getElementById("s2").value = "";
+    document.getElementById("s3").value = "";
+    document.getElementById("s4").value = "";
+    document.getElementById("s5").value = "";
+}
+</script>
+
+</body>
+</html>

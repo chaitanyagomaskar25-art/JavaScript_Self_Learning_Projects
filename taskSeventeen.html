@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math & RegExp</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --container-bg: #ffffff;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --code-bg: #0f172a;
+            --code-text: #38bdf8;
+            --table-header: #f1f5f9;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--primary-gradient);
+            border-radius: 24px;
+            color: white;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.3);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 32px;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 20px 0 15px 0;
+            color: var(--accent-purple);
+        }
+
+        .card {
+            background: var(--container-bg);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: var(--table-header);
+            padding: 16px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #ec4899;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        input#password {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin-bottom: 20px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+
+        input#password:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .rules p {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #f8fafc;
+        }
+
+        .strength {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            display: none; 
+        }
+
+        .strength.weak { display: block; background: #fee2e2; color: var(--error); }
+        .strength.medium { display: block; background: #fef3c7; color: var(--warning); }
+        .strength.strong { display: block; background: #d1fae5; color: var(--success); }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Math & RegExp</h1>
+        <p>Mastering Computational Logic & Pattern Detection</p>
+    </header>
+
+    <section id="math">
+        <h2>Math Object</h2>
+        <div class="card">
+            <span class="badge">OBJECT REFERENCE</span>
+            <p>The <code>Math</code> object is a built-in property that allows you to perform mathematical tasks on numbers. Unlike other objects, it has no constructor; all properties and methods are static.</p>
+            
+            <h3>Essential Methods</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Operation</th>
+                            <th>Result Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>Math.sqrt(16)</code></td><td>Square Root</td><td><code>4</code></td></tr>
+                        <tr><td><code>Math.pow(2, 3)</code></td><td>Power (Base, Exp)</td><td><code>8</code></td></tr>
+                        <tr><td><code>Math.random()</code></td><td>Random (0 to 1)</td><td><code>0.823...</code></td></tr>
+                        <tr><td><code>Math.round(4.5)</code></td><td>Round Nearest</td><td><code>5</code></td></tr>
+                        <tr><td><code>Math.floor(4.9)</code></td><td>Round Down</td><td><code>4</code></td></tr>
+                        <tr><td><code>Math.ceil(4.1)</code></td><td>Round Up</td><td><code>5</code></td></tr>
+                        <tr><td><code>Math.abs(-10)</code></td><td>Absolute Value</td><td><code>10</code></td></tr>
+                        <tr><td><code>Math.trunc(4.9)</code></td><td>Remove Decimals</td><td><code>4</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="regexp">
+        <h2>Regular Expressions</h2>
+        <div class="card">
+            <span class="badge">PATTERN MATCHING</span>
+            <p>Regular expressions are patterns used to match character combinations in strings. In JavaScript, regular expressions are also objects.</p>
+            
+            <div class="grid">
+                <div>
+                    <h3>Common Patterns</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr><th>Symbol</th><th>Matches</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>\d</code></td><td>Digits (0-9)</td></tr>
+                                <tr><td><code>\w</code></td><td>Alphanumeric</td></tr>
+                                <tr><td><code>\s</code></td><td>Whitespace</td></tr>
+                                <tr><td><code>[a-z]</code></td><td>Lowercase Range</td></tr>
+                                <tr><td><code>^</code></td><td>Start of String</td></tr>
+                                <tr><td><code>$</code></td><td>End of String</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <h3>RegExp Flags</h3>
+                    <ul>
+                        <li><strong>g (Global):</strong> Don't stop at first match</li>
+                        <li><strong>i (Ignore Case):</strong> Case-insensitive search</li>
+                        <li><strong>m (Multiline):</strong> Search across line breaks</li>
+                    </ul>
+                    
+                    <h3>Methods</h3>
+                    <pre>
+// Using .test()
+let pattern = /hello/i;
+pattern.test("Hello World"); // true
+
+// Using .replace()
+"Blue Whale".replace(/Blue/, "Red");</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Validation Case Study</h2>
+        <div class="card">
+            <h3>Secure Password Logic</h3>
+            <p>A typical secure password requires specific lookahead assertions <code>(?=...)</code> to verify complexity without consuming characters.</p>
+            <pre>/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/</pre>
+            <div class="grid" style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">
+                <div>• Minimum 8 characters</div>
+                <div>• 1 Uppercase & 1 Lowercase</div>
+                <div>• 1 Number & 1 Special Char</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="checker">
+        <h2>Password Strength</h2>
+        <div class="card">
+            <input type="password" id="password" placeholder="Enter password">
+
+            <div class="rules">
+                <p id="lower">❌ At least one lowercase</p>
+                <p id="upper">❌ At least one uppercase</p>
+                <p id="number">❌ At least one number</p>
+                <p id="special">❌ At least one special character</p>
+                <p id="length">❌ Minimum 8 characters</p>
+            </div>
+
+            <div class="strength" id="strength"></div>
+        </div>
+    </section>
+</div>
+
+<script>
+
+    const passwordInput = document.getElementById("password");
+
+passwordInput.addEventListener("keyup", checkPassword);
+
+
+function checkPassword() {
+    let password = passwordInput.value;
+
+    let lower = /[a-z]/;
+    let upper = /[A-Z]/;
+    let number = /[0-9]/;
+    let special = /[@$!%*?&]/;
+
+    let strength = document.getElementById("strength");
+
+    let score = 0;
+
+    if (lower.test(password)) {
+        document.getElementById("lower").textContent = "✅ At least one lowercase";
+        score++;
+    } else {
+        document.getElementById("lower").textContent = "❌ At least one lowercase";
+    }
+
+    if (upper.test(password)) {
+        document.getElementById("upper").textContent = "✅ At least one uppercase";
+        score++;
+    } else {
+        document.getElementById("upper").textContent = "❌ At least one uppercase";
+    }
+
+    if (number.test(password)) {
+        document.getElementById("number").textContent = "✅ At least one number";
+        score++;
+    } else {
+        document.getElementById("number").textContent = "❌ At least one number";
+    }
+
+    if (special.test(password)) {
+        document.getElementById("special").textContent = "✅ At least one special character";
+        score++;
+    } else {
+        document.getElementById("special").textContent = "❌ At least one special character";
+    }
+
+    if (password.length >= 8) {
+        document.getElementById("length").textContent = "✅ Minimum 8 characters";
+        score++;
+    } else {
+        document.getElementById("length").textContent = "❌ Minimum 8 characters";
+    }
+
+    if (password.length === 0) {
+        strength.textContent = "";
+        strength.className = "strength";
+    } 
+    else if (score <= 2) {
+        strength.textContent = "Weak Password";
+        strength.className = "strength weak";
+    } 
+    else if (score <= 4) {
+        strength.textContent = "Medium Password";
+        strength.className = "strength medium";
+    } 
+    else {
+        strength.textContent = "Strong Password";
+        strength.className = "strength strong";
+    }
+}
+</script>
+
+</body>
+</html>

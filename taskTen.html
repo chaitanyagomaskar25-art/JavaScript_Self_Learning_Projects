@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Functions </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #f1f5f9; 
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            padding: 40px 20px;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 40px;
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        strong {
+            color: #4f46e5;
+            background: #eef2ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #4f46e5; 
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        .patterns-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .box {
+            background: #ffffff;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            border-left: 6px solid #10b981; 
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+        .box h2 {
+            color: #059669;
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+        }
+
+        code {
+            display: block;
+            background: #0f172a; 
+            color: #38bdf8;      
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            border: 1px solid #334155;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+            white-space: pre-wrap;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .calculator-box {
+            background: #1e293b;
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            border-top: 5px solid #facc15;
+        }
+
+        .calculator-box h2 { 
+            color: #facc15; 
+            margin-bottom: 20px; 
+        }
+
+        .calculator-box input {
+            width: 100%;
+            max-width: 300px;
+            padding: 12px;
+            margin: 10px auto;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: #4c515c;
+            color: rgb(212, 150, 150);
+            display: block;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .button-group button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .button-group button:hover { 
+            background: #4338ca; 
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4ade80;
+        }
+        @media (max-width: 600px) {
+            .tool-group { flex-direction: column; }
+            .tool-group button { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>JavaScript Functions - Reusable Logic</h1>
+
+<div class="card">
+    <h2>1. What is a Function?</h2>
+    <p>
+        A <strong>function</strong> is a reusable block of code designed to perform a specific task.
+        Instead of writing the same logic multiple times, we define it once and use it whenever needed.
+    </p>
+    <code>
+function greet() {
+    console.log("Hello!");
+}
+greet();
+    </code>
+</div>
+
+
+
+<h1>Types of Functions</h1>
+
+<div class="patterns-container">
+    <div class="box">
+        <h2>1. Function Declaration</h2>
+        <p>A normal function defined using the <strong>function</strong> keyword.</p>
+        <code>function greet() { console.log("Hello"); }</code>
+    </div>
+
+    <div class="box">
+        <h2>2. Function Expression</h2>
+        <p>A function stored inside a <strong>variable</strong>.</p>
+        <code>let greet = function() { console.log("Hello"); };</code>
+    </div>
+
+    <div class="box">
+        <h2>3. Arrow Function</h2>
+        <p>A short and modern way to write functions (introduced in <strong>ES6</strong>).</p>
+        <code>const greet = () => { console.log("Hello"); };</code>
+    </div>
+
+    <div class="box">
+        <h2>4. Anonymous Function</h2>
+        <p>A function <strong>without a name</strong>.</p>
+        <code>setTimeout(function() { console.log("Hello"); }, 1000);</code>
+    </div>
+
+    <div class="box">
+        <h2>5. Named Function</h2>
+        <p>A function that has its <strong>own name</strong>.</p>
+        <code>function showMessage() { console.log("Welcome"); }</code>
+    </div>
+
+    <div class="box">
+        <h2>6. Parameterized Function</h2>
+        <p>A function that accepts <strong>parameters</strong> (inputs).</p>
+        <code>function add(a, b) { console.log(a + b); }</code>
+    </div>
+
+    <div class="box">
+        <h2>7. Return Value</h2>
+        <p>Returns a value using the <strong>return</strong> keyword.</p>
+        <code>function square(n) { return n * n; }</code>
+    </div>
+
+    <div class="box">
+        <h2>8. IIFE</h2>
+        <p>A function that runs <strong>immediately</strong> after creation.</p>
+        <code>(function() { console.log("Runs immediately"); })();</code>
+    </div>
+
+    <div class="box">
+        <h2>9. Callback Function</h2>
+        <p>A function passed as an <strong>argument</strong> to another function.</p>
+        <code>function greet(name, callback) { callback(); }</code>
+    </div>
+
+    <div class="box">
+        <h2>10. Constructor</h2>
+        <p>Used to <strong>create objects</strong> using the 'this' keyword.</p>
+        <code>function Person(n) { this.name = n; }</code>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Parameters vs Arguments</h2>
+    <p>
+        <strong>Parameters</strong> are placeholders in the definition, while <strong>Arguments</strong> are the actual values you pass.
+    </p>
+    <code>
+function greet(name) { // name is a parameter
+    console.log("Hello " + name);
+}
+greet("Alice"); // "Alice" is an argument
+    </code>
+</div>
+
+<div class="calculator-box">
+    <h2>Area Calculator</h2>
+    <input type="number" id="value1" placeholder="Value 1 (Side/Radius)">
+    <input type="number" id="value2" placeholder="Value 2 (Height/Breadth)">
+    <div class="button-group">
+        <button id="squareResult">Area of Square</button>
+        <button id="rectangleResult">Area of Rectangle</button>
+        <button id="circleResult">Area of Circle</button>
+    </div>
+    <div id="result">Result will appear here</div>
+</div>
+
+<script>
+    const squareResult = document.getElementById("squareResult");
+    squareResult.addEventListener("click", square);
+
+     const rectangleResult = document.getElementById("rectangleResult");
+    rectangleResult.addEventListener("click", rectangle);
+
+     const circleResult = document.getElementById("circleResult");
+    circleResult.addEventListener("click", circle);
+
+
+    function square() {
+        let side = document.getElementById("value1").value;
+        document.getElementById("result").innerText = "Area of Square = " + (side * side);
+    }
+    function rectangle() {
+        let l = document.getElementById("value1").value;
+        let b = document.getElementById("value2").value;
+        document.getElementById("result").innerText = "Area of Rectangle = " + (l * b);
+    }
+    function circle() {
+        let r = document.getElementById("value1").value;
+        document.getElementById("result").innerText = "Area of Circle = " + (3.14 * r * r).toFixed(2);
+    }
+</script>
+</body>
+</html>

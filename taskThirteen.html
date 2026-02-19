@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Date & Date Object</title>
+    <style>
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background: #fdfaf6;
+            color: #334155;
+            font-family: 'Inter', -apple-system, sans-serif;
+            padding: 60px 20px;
+            line-height: 1.8;
+        }
+
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+
+        h1 {
+            text-align: center;
+            color: #4f46e5;
+            margin-bottom: 50px;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        section {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #4f46e5;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        h2 {
+            color: #4f46e5;;
+            margin-bottom: 18px;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #64748b;
+            font-size: 1rem;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        strong {
+            color: #0f172a;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        p code {
+            color: #059669;
+            background: rgba(5, 150, 105, 0.08);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        code {
+            display: block;
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 24px;
+            border-radius: 14px;
+            margin-top: 15px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.95rem;
+            border: 1px solid #edf2f7;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+       .kw { color: #4f46e5; font-weight: bold; } 
+       .mtd { color: #7c3aed; font-weight: 600; } 
+       .str { color: #059669; } 
+       .cm { color: #94a3b8; font-style: italic; }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: 4f46e5;
+            padding: 18px;
+            text-align: left;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 16px 18px;
+            background-color: #ffffff;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: #475569;
+        }
+
+        ul li::before {
+            content: "✦";
+            color: #059669;
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .tip-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .tip-item {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+
+        .highlight-box {
+            color: #4f46e5;
+            font-weight: 700;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .overview-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .abstract {
+            font-size: 1.1rem;
+            color: #1e293b;
+            border-left: 3px solid #4f46e5;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .data-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .point {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+
+        .clock-console {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .clock-console::before {
+        content: "LIVE SYSTEM TIME";
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: #38bdf8;
+        opacity: 0.8;
+    }
+
+    #digital-time {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1;
+    }
+
+.clock-system {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .analog-clock {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #0f172a; 
+            border: 10px solid #1e293b;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .num {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #94a3b8;
+            padding: 10px;
+        }
+
+        .n12 { transform: rotate(0deg); }  
+        .n12 span { display: block; 
+            transform: rotate(0deg); }
+
+        .n3  { transform: rotate(90deg); } 
+        .n3 span  { display: block; 
+            transform: rotate(-90deg); }
+
+        .n6  { transform: rotate(180deg); } 
+        .n6 span  { display: block; 
+            transform: rotate(-180deg); }
+
+        .n9  { transform: rotate(270deg); } 
+        .n9 span  { display: block; 
+            transform: rotate(-270deg); }
+
+
+        .analog-clock::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #38bdf8;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            border-radius: 10px;
+            transform: translateX(-50%);
+        }
+
+        .hour-h { 
+            width: 8px; 
+            height: 65px; 
+            background: #ffffff; 
+            z-index: 3; }
+        .min-h { 
+            width: 5px; 
+            height: 95px; 
+            background: #64748b; 
+            z-index: 2; }
+        .sec-h { 
+            width: 2px; 
+            height: 110px; 
+            background: #38bdf8; 
+            z-index: 1; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            section { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Date & Date Object</h1>
+<section>
+        <h2>1. What is Date?</h2>
+        <div class="overview-container">
+            <p class="abstract">
+                The <span class="keyword-focus">Date Object</span> is a core JavaScript API used to manage temporal data. It tracks time by calculating the number of milliseconds elapsed since the <strong>Unix Epoch</strong> (January 1, 1970).
+            </p>
+
+            <p>It acts as a multi-dimensional container for:</p>
+            
+            <div class="data-points">
+                <div class="point"><span class="point-dot"></span> Calendar (Year, Month, Day)</div>
+                <div class="point"><span class="point-dot"></span> Chronology (Hours, Mins, Secs)</div>
+                <div class="point"><span class="point-dot"></span> Precision (Milliseconds)</div>
+                <div class="point"><span class="point-dot"></span> Logic (Timezone Offsets)</div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section>
+        <h2>2. Creating Date Objects</h2>
+        <p>Different ways to create date objects:</p>
+
+        <h3>Current Date and Time</h3>
+        <code><span class="kw">let</span> now = <span class="kw">new</span> Date();  
+<span class="kw">console</span>.log(now); <span class="cm">// e.g., Tue Jan 20 2026 15:30:12 GMT+0000</span></code>
+
+        <h3>Specific Date</h3>
+        <code><span class="kw">let</span> birthday = <span class="kw">new</span> Date(<span class="str">"2000-05-15"</span>);  
+<span class="kw">console</span>.log(birthday); <span class="cm">// Mon May 15 2000 00:00:00</span></code>
+
+        <h3>Using Year, Month, Day, etc.</h3>
+        <code><span class="kw">let</span> examDate = <span class="kw">new</span> Date(<span class="str">2026, 0, 20, 10, 30, 0</span>);  
+<span class="cm">// year, month (0-based), day, hours, minutes, seconds</span>
+<span class="kw">console</span>.log(examDate);</code>
+        <p><strong>Note:</strong> Month starts from <strong>0</strong> → January = 0, December = 11</p>
+    </section>
+
+    <section>
+        <h2>3. Getting Date Components</h2>
+        <p>You can get parts of the date using <strong>getter methods</strong>:</p>
+        <code><span class="kw">let</span> now = <span class="kw">new</span> Date();  
+
+now.<span class="mtd">getFullYear</span>();   <span class="cm">// 2026</span>  
+now.<span class="mtd">getMonth</span>();      <span class="cm">// 0 → January</span>  
+now.<span class="mtd">getDate</span>();       <span class="cm">// 20 → day of month</span>  
+now.<span class="mtd">getDay</span>();        <span class="cm">// 2 → day of week (0 = Sunday)</span>  
+now.<span class="mtd">getHours</span>();      <span class="cm">// 15</span>  
+now.<span class="mtd">getTime</span>();       <span class="cm">// milliseconds since Jan 1, 1970</span></code>
+    </section>
+
+    <section>
+        <h2>4. Setting Date Components</h2>
+        <p>You can change parts of a date using <strong>setter methods</strong>:</p>
+        <code><span class="kw">let</span> myDate = <span class="kw">new</span> Date();  
+
+myDate.<span class="mtd">setFullYear</span>(<span class="str">2025</span>);  
+myDate.<span class="mtd">setMonth</span>(<span class="str">5</span>);        <span class="cm">// June (0-based)</span>  
+myDate.<span class="mtd">setDate</span>(<span class="str">10</span>);  
+myDate.<span class="mtd">setHours</span>(<span class="str">14</span>);  
+
+<span class="kw">console</span>.log(myDate);</code>
+    </section>
+
+    <section>
+        <h2>5. Formatting Date</h2>
+        <code><span class="kw">let</span> now = <span class="kw">new</span> Date();
+
+now.<span class="mtd">toDateString</span>();         <span class="cm">// Tue Jan 20 2026</span>  
+now.<span class="mtd">toTimeString</span>();         <span class="cm">// 15:30:12 GMT+0000</span>  
+now.<span class="mtd">toLocaleDateString</span>();  <span class="cm">// 1/20/2026</span>  
+now.<span class="mtd">toLocaleTimeString</span>();  <span class="cm">// 15:30:12</span></code>
+    </section>
+
+    <section>
+        <h2>6. Example: Display Date in HTML</h2>
+        <p>You can show the current date on a webpage:</p>
+        <code><span class="str">&lt;p id="currentDate"&gt;&lt;/p&gt;</span>
+
+<span class="str">&lt;script&gt;</span>
+    <span class="kw">let</span> now = <span class="kw">new</span> Date();
+    <span class="kw">document</span>.<span class="mtd">getElementById</span>(<span class="str">"currentDate"</span>).innerText = <span class="str">"Today is: "</span> + now.<span class="mtd">toDateString</span>();
+<span class="str">&lt;/script&gt;</span></code>
+    </section>
+
+     <section>
+        <h2>7. Summary Table</h2>
+        <table>
+            <tr>
+                <th>Method</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>new Date()</td>
+                <td>Create current date & time</td>
+            </tr>
+            <tr>
+                <td>new Date("YYYY-MM-DD")</td>
+                <td>Create specific date</td>
+            </tr>
+            <tr>
+                <td>getFullYear()</td>
+                <td>Get year</td>
+            </tr>
+            <tr>
+                <td>getMonth()</td>
+                <td>Get month (0–11)</td>
+            </tr>
+            <tr>
+                <td>getDate()</td>
+                <td>Get day of month</td>
+            </tr>
+            <tr>
+                <td>getDay()</td>
+                <td>Get day of week (0–6)</td>
+            </tr>
+            <tr>
+                <td>getHours()</td>
+                <td>Get hours</td>
+            </tr>
+            <tr>
+                <td>getMinutes()</td>
+                <td>Get minutes</td>
+            </tr>
+            <tr>
+                <td>getSeconds()</td>
+                <td>Get seconds</td>
+            </tr>
+            <tr>
+                <td>getTime()</td>
+                <td>Milliseconds since Jan 1, 1970</td>
+            </tr>
+            <tr>
+                <td>setFullYear(), setMonth(), setDate()</td>
+                <td>Change date components</td>
+            </tr>
+            <tr>
+                <td>toDateString()</td>
+                <td>Readable date string</td>
+            </tr>
+            <tr>
+                <td>toTimeString()</td>
+                <td>Readable time string</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>8. Quick Tips</h2>
+        <div class="tip-list">
+            <div class="tip-item">
+                <span class="tip-icon">01.</span>
+                <p>Months are <span class="highlight-box">0-indexed</span>: January is <span class="highlight-box">0</span> and December is <span class="highlight-box">11</span>.</p>
+            </div>
+            
+            <div class="tip-item">
+                <span class="tip-icon">02.</span>
+                <p>Use <span class="highlight-box">getTime()</span> for high-precision <strong>date comparisons</strong> and math.</p>
+            </div>
+
+            <div class="tip-item">
+                <span class="tip-icon">03.</span>
+                <p>The <span class="highlight-box">Date</span> object is <strong>mutable</strong>: changing a component updates the original object.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="clock-console">
+        <div id="digital-time">00:00:00</div>
+    </div>
+
+<div class="clock-system">
+        <div class="analog-clock" id="clockFace">
+            <div class="num n12"><span>12</span></div>
+            <div class="num n3"><span>3</span></div>
+            <div class="num n6"><span>6</span></div>
+            <div class="num n9"><span>9</span></div>
+
+            <div class="hand hour-h" id="hHand"></div>
+            <div class="hand min-h" id="mHand"></div>
+            <div class="hand sec-h" id="sHand"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        document.getElementById('digital-time').textContent = `${hours}:${minutes}:${seconds}`;
+        
+        
+    }
+    setInterval(updateClock, 10);
+    updateClock(); 
+
+
+// ==========================================================
+function updateClockLogic() {
+    const time = new Date();
+    const seconds = time.getSeconds();
+    const minutes = time.getMinutes();
+    const hours = time.getHours();
+
+    const sRotation = (seconds / 60) * 360;
+    const mRotation = (minutes / 60) * 360 + (seconds / 60) * 6;
+    const hRotation = (hours % 12 / 12) * 360 + (minutes / 60) * 30;
+
+    document.getElementById('sHand').style.transform = `translateX(-50%) rotate(${sRotation}deg)`;
+    document.getElementById('mHand').style.transform = `translateX(-50%) rotate(${mRotation}deg)`;
+    document.getElementById('hHand').style.transform = `translateX(-50%) rotate(${hRotation}deg)`;
+}
+
+
+setInterval(updateClockLogic, 1000);
+updateClockLogic();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Loops</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            padding: 30px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+
+        h3 {
+            margin-top: 25px;
+            color: #1e293b;
+        }
+
+        p {
+            margin: 12px 0 20px;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        td {
+            background: #f8fafc;
+            padding: 14px;
+            vertical-align: top;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover td {
+            background: #eef2ff;
+        }
+
+        pre {
+            background: #0f172a;
+            color: #e5e7eb;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 10px;
+            width: 220px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #c7d2fe;
+            margin-top: 6px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background: #2563eb;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 8px 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .output {
+            background: #f1f5f9;
+            border-left: 6px solid #2563eb;
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-weight: 500;
+        }
+
+        ol li {
+            margin-top: 22px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        ul li {
+            margin-top: 10px;
+            font-weight: normal;
+        }
+
+        hr {
+            margin: 40px 0;
+            height: 2px;
+            border: none;
+            background: linear-gradient(to right, #2563eb, #0f172a);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 14px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🚀 JavaScript Loops, Break & Continue</h2>
+
+<p>
+Loops are used to repeat a block of code until a condition becomes false.
+JavaScript provides multiple looping techniques for different situations.
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Loop</th>
+            <th>Description</th>
+            <th>Basic Syntax</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>for loop</td>
+            <td>Used when you know **how many times** you want to repeat a block of code.</td>
+            <td>
+<pre>
+for(initialization; condition; increment/decrement){
+    // code to execute
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>while loop</td>
+            <td>Used when you want to repeat a block of code **while a condition is true**.</td>
+            <td>
+<pre>
+while(condition){
+    // code to execute
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>do-while loop</td>
+            <td>Similar to while, but **executes the code at least once** before checking the condition.</td>
+            <td>
+<pre>
+do {
+    // code to execute
+} while(condition);
+</pre>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Examples:</h3>
+
+<pre>
+// for loop
+for(let i = 1; i <= 5; i++){
+    console.log("For loop iteration:", i);
+}
+
+// while loop
+let j = 1;
+while(j <= 5){
+    console.log("While loop iteration:", j);
+    j++;
+}
+
+// do-while loop
+let k = 1;
+do {
+    console.log("Do-while loop iteration:", k);
+    k++;
+} while(k <= 5);
+</pre>
+
+
+<h2>Break and Continue in JavaScript</h2>
+
+<p><strong>Break:</strong> Used to **exit a loop immediately**.</p>
+<p><strong>Continue:</strong> Used to **skip the current iteration** and move to the next iteration.</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Keyword</th>
+            <th>Use</th>
+            <th>Example</th>
+            <th>Output</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>break</td>
+            <td>Exit the loop completely when a condition is met</td>
+            <td>
+<pre>
+for(let i=1; i<=5; i++){
+    if(i==3){ break};
+    else{console.log(i)};
+}
+
+// break → stops the loop 
+completely at i = 3
+
+</pre>
+            </td>
+            <td>1<br>2</td>
+        </tr>
+        <tr>
+            <td>continue</td>
+            <td>Skip the current iteration when a condition is met</td>
+            <td>
+<pre>
+for(let i=1; i<=5; i++){
+    if(i==3) {continue};
+    else{console.log(i)};
+}
+
+// continue → skips printing i = 3 
+but continues with the rest of the loop
+
+</pre>
+            </td>
+            <td>1<br>2<br>4<br>5</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Examples:</h2>
+<ol>
+    <li>Print Multiplication Table</li><br><br>
+    <label>Enter a number: </label>
+<input type="number" id="tableNum">
+ <button id="tableForLoop">For Loop</button> 
+<button id="tableWhileLoop">While Loop</button>
+<button id="tableDoWhileLoop">Do-While Loop</button>
+<div id="tableOutput" class="output"></div><br><br>
+    <ul>
+        <li>for loop</li>
+    <code>
+        <pre>let num = 10;
+function tableFor() {
+    for(let i=1; i<=10; i++){
+        console.log(`${num} x ${i} = ${num*i}\n`);
+    }
+}
+        </pre>
+    </code>
+    <li>while loop</li>
+    <code>
+        <pre>let num = 10
+function tableWhile() {
+    let i = 1;
+    while(i <= 10){
+        console.log(`${num} x ${i} = ${num*i}\n`);
+        i++;
+    }
+}
+
+        </pre>
+    </code>
+    <li>Do-while loop</li>
+    <code>
+        <pre>let num = 10
+function tableDoWhile() {
+    let i = 1;
+    do {
+        console.log(`${num} x ${i} = ${num*i}\n`);
+        i++;
+    } while(i <= 10);
+}
+
+        </pre>
+    </code>
+    </ul>
+    <li>Factorial of a Number</li><br><br>
+    <label>Enter a number: </label>
+<input type="number" id="factNum">
+<button id="factForLoop">For Loop</button>
+<button id="factWhileLoop">While Loop</button> 
+<button id="factDoWhileLoop">Do-While Loop</button> 
+<div id="factOutput" class="output"></div><br><br>
+    <ul>
+        <li>for loop</li>
+    <code>
+        <pre>let num = 5;
+function factFor() {
+    if(num < 0){
+        console.log("Factorial not defined for negative numbers!");
+        return;
+    }
+    let fact = 1;
+    for(let i=1; i<=num; i++){
+        fact *= i;
+    }
+    console.log(`Factorial of ${num} (For Loop) = ${fact}`);
+}</pre>
+    </code>
+    <li>while loop</li>
+    <code>
+        <pre>let num = 5;
+function factWhile() {
+    if(num < 0){
+        console.log("Factorial not defined for negative numbers!");
+        return;
+    }
+    let fact = 1, i = 1;
+    while(i <= num){
+        fact *= i;
+        i++;
+    }
+    console.log(`Factorial of ${num} (While Loop) = ${fact}`);
+}
+
+        </pre>
+    </code>
+    <li>Do-while loop</li>
+    <code>
+        <pre>let num = 8; 
+function factDoWhile() {
+    if(num < 0){
+        console.log("Factorial not defined for negative numbers!");
+        return;
+    }
+    let fact = 1, i = 1;
+    if(num === 0){
+        fact = 1; // factorial of 0
+    } else {
+        do {
+            fact *= i;
+            i++;
+        } while(i <= num);
+    }
+    console.log(Factorial of ${num} (Do-While Loop) = ${fact}`);
+}
+        </pre>
+    </code>
+    </ul>
+    <li>Sum of Numbers from 1 to n</li><br><br>
+    <label>Enter n: </label>
+<input type="number" id="sumNum">
+<button id="sumForLoop">For Loop</button>
+<button id="sumWhileLoop">While Loop</button>
+<button id="sumDOWhileLoop">Do-While Loop</button>
+<div id="sumOutput" class="output"></div>
+<br><br>
+    <ul>
+        <li>for loop</li>
+    <code>
+        <pre>let n = 5;
+function sumFor() {
+    let sum = 0;
+    for(let i=1; i<=n; i++){
+        sum += i;
+    }
+    console.log(`Sum of 1 to ${n} (For Loop) = ${sum}`);
+}</pre>
+    </code>
+    <li>while loop</li>
+    <code>
+        <pre>let n = 9;
+function sumWhile() {
+    let sum = 0, i = 1;
+    while(i <= n){
+        sum += i;
+        i++;
+    }
+    console.log(`Sum of 1 to ${n} (While Loop) = ${sum}`);
+}
+
+        </pre>
+    </code>
+    <li>Do-while</li>
+    <code>
+        <pre>let n = 5;
+function sumDoWhile() {
+    let sum = 0, i = 1;
+    if(n >= 1){
+        do {
+            sum += i;
+            i++;
+        } while(i <= n);
+    }
+   console.log(`Sum of 1 to ${n} (Do-While Loop) = ${sum}`);
+}
+        </pre>
+    </code>
+    </ul>
+</ol>
+<footer>
+JavaScript Loops, Break & Continue
+</footer>
+
+<script>
+const tableForLoop = document.getElementById("tableForLoop"); 
+tableForLoop.addEventListener("click", tableFor);
+
+const tableWhileLoop = document.getElementById("tableWhileLoop"); 
+tableWhileLoop.addEventListener("click", tableWhile);
+
+const tableDoWhileLoop = document.getElementById("tableDoWhileLoop"); 
+tableDoWhileLoop.addEventListener("click", tableDoWhile);
+
+
+
+const factForLoop = document.getElementById("factForLoop"); 
+factForLoop.addEventListener("click", factFor);
+
+const factWhileLoop = document.getElementById("factWhileLoop"); 
+factWhileLoop.addEventListener("click", factWhile);
+
+const factDoWhileLoop = document.getElementById("factDoWhileLoop"); 
+factDoWhileLoop.addEventListener("click", factDoWhile);
+
+
+
+
+const sumForLoop = document.getElementById("sumForLoop"); 
+sumForLoop.addEventListener("click", sumFor);
+
+const sumWhileLoop = document.getElementById("sumWhileLoop"); 
+sumWhileLoop.addEventListener("click", sumWhile);
+
+const sumDOWhileLoop = document.getElementById("sumDOWhileLoop"); 
+sumDOWhileLoop.addEventListener("click", sumDoWhile);
+
+
+
+function tableFor() {
+    const num = parseInt(document.getElementById("tableNum").value);
+    let result = `Multiplication Table of ${num} (For Loop):\n`;
+    for(let i=1; i<=10; i++){
+        result += `${num} x ${i} = ${num*i}\n`;
+    }
+    document.getElementById("tableOutput").textContent = result;
+}
+
+function tableWhile() {
+    const num = parseInt(document.getElementById("tableNum").value);
+    let i = 1;
+    let result = `Multiplication Table of ${num} (While Loop):\n`;
+    while(i <= 10){
+        result += `${num} x ${i} = ${num*i}\n`;
+        i++;
+    }
+    document.getElementById("tableOutput").textContent = result;
+}
+
+function tableDoWhile() {
+    const num = parseInt(document.getElementById("tableNum").value);
+    let i = 1;
+    let result = `Multiplication Table of ${num} (Do-While Loop):\n`;
+    do {
+        result += `${num} x ${i} = ${num*i}\n`;
+        i++;
+    } while(i <= 10);
+    document.getElementById("tableOutput").textContent = result;
+}
+
+function factFor() {
+    const num = parseInt(document.getElementById("factNum").value);
+    if(num < 0){
+        document.getElementById("factOutput").textContent = "Factorial not defined for negative numbers!";
+        return;
+    }
+    let fact = 1;
+    for(let i=1; i<=num; i++){
+        fact *= i;
+    }
+    document.getElementById("factOutput").textContent = `Factorial of ${num} (For Loop) = ${fact}`;
+}
+
+function factWhile() {
+    const num = parseInt(document.getElementById("factNum").value);
+    if(num < 0){
+        document.getElementById("factOutput").textContent = "Factorial not defined for negative numbers!";
+        return;
+    }
+    let fact = 1, i = 1;
+    while(i <= num){
+        fact *= i;
+        i++;
+    }
+    document.getElementById("factOutput").textContent = `Factorial of ${num} (While Loop) = ${fact}`;
+}
+
+function factDoWhile() {
+    const num = parseInt(document.getElementById("factNum").value);
+    if(num < 0){
+        document.getElementById("factOutput").textContent = "Factorial not defined for negative numbers!";
+        return;
+    }
+    let fact = 1, i = 1;
+    if(num === 0){
+        fact = 1;
+    } else {
+        do {
+            fact *= i;
+            i++;
+        } while(i <= num);
+    }
+    document.getElementById("factOutput").textContent = `Factorial of ${num} (Do-While Loop) = ${fact}`;
+}
+
+function sumFor() {
+    const n = parseInt(document.getElementById("sumNum").value);
+    let sum = 0;
+    for(let i=1; i<=n; i++){
+        sum += i;
+    }
+    document.getElementById("sumOutput").textContent = `Sum of 1 to ${n} (For Loop) = ${sum}`;
+}
+
+function sumWhile() {
+    const n = parseInt(document.getElementById("sumNum").value);
+    let sum = 0, i = 1;
+    while(i <= n){
+        sum += i;
+        i++;
+    }
+    document.getElementById("sumOutput").textContent = `Sum of 1 to ${n} (While Loop) = ${sum}`;
+}
+
+function sumDoWhile() {
+    const n = parseInt(document.getElementById("sumNum").value);
+    let sum = 0, i = 1;
+    if(n >= 1){
+        do {
+            sum += i;
+            i++;
+        } while(i <= n);
+    }
+    document.getElementById("sumOutput").textContent = `Sum of 1 to ${n} (Do-While Loop) = ${sum}`;
+}
+</script>
+
+
+
+</div>
+</body>
+</html>

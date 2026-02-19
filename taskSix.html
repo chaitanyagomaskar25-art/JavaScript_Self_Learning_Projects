@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>If-Else vs Switch Statement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #eef2f7;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: #ffffff;
+            padding: 45px;
+            border-radius: 18px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #1e293b;
+            border-left: 6px solid #0f172a;
+            padding-left: 15px;
+            margin: 40px 0 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        td {
+            background: #f9fafb;
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        pre {
+            background: #020617;
+            color: #e5e7eb;
+            padding: 16px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 13.5px;
+            margin: 15px 0;
+        }
+
+        .code-title {
+            font-weight: 600;
+            margin-top: 20px;
+            color: #334155;
+        }
+
+        .grade-box {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            padding: 25px;
+            border-radius: 14px;
+            margin-top: 30px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #cbd5f5;
+        }
+
+        button {
+            padding: 10px 18px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            background: #0f172a;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0f172a;
+        }
+
+        .output {
+            margin-top: 15px;
+            background: #eff6ff;
+            border-left: 5px solid #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>If-Else vs Switch Statement</h1>
+    <p class="subtitle">Comparison with Examples and Grade System Program</p>
+
+    <!-- Comparison Table -->
+    <h2>Difference Between if-else and switch</h2>
+
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>if-else</th>
+            <th>switch</th>
+        </tr>
+        <tr>
+            <td>Purpose</td>
+            <td>Executes code based on conditions</td>
+            <td>Matches a single value against cases</td>
+        </tr>
+        <tr>
+            <td>Conditions</td>
+            <td>Supports complex expressions</td>
+            <td>Works with discrete values only</td>
+        </tr>
+        <tr>
+            <td>Readability</td>
+            <td>Becomes lengthy with many conditions</td>
+            <td>Cleaner for many fixed values</td>
+        </tr>
+        <tr>
+            <td>Default handling</td>
+            <td>Uses else</td>
+            <td>Uses default</td>
+        </tr>
+    </table>
+
+    <div class="code-title">if-else Example</div>
+    <pre>
+let score = 85;
+
+if(score >= 90){
+    console.log("Grade A");
+} else if(score >= 75){
+    console.log("Grade B");
+} else {
+    console.log("Grade C");
+}
+    </pre>
+
+    <div class="code-title">switch Example</div>
+    <pre>
+let day = 3;
+
+switch(day){
+    case 1:
+        console.log("Monday");
+        break;
+    case 2:
+        console.log("Tuesday");
+        break;
+    case 3:
+        console.log("Wednesday");
+        break;
+    default:
+        console.log("Another day");
+}
+    </pre>
+
+    <h2>Grade System Program</h2>
+
+    <div class="grade-box">
+        <label>Enter Marks (0-100):</label><br>
+        <input type="number" id="marks" min="0" max="100">
+
+        <br>
+        <button  id="checkByifElse">Check using if-else</button>
+        <button  id="checkBySwitch">Check using switch</button>
+
+        <div id="result" class="output"></div>
+    </div>
+
+    <footer>
+        JavaScript If-Else vs Switch Statement
+    </footer>
+
+</div>
+
+<script>
+    const checkByifElse = document.getElementById("checkByifElse");
+    checkByifElse.addEventListener("click", gradeIfElse );
+
+    const checkBySwitch = document.getElementById("checkBySwitch");
+    checkBySwitch.addEventListener("click", gradeSwitch);
+    
+function gradeIfElse() {
+    const marks = parseInt(document.getElementById("marks").value);
+    let grade = "";
+
+    if (marks >= 90 && marks <= 100) grade = "A+";
+    else if (marks >= 80) grade = "A";
+    else if (marks >= 70) grade = "B";
+    else if (marks >= 60) grade = "C";
+    else if (marks >= 50) grade = "D";
+    else if (marks >= 0) grade = "F";
+    else grade = "Invalid marks";
+
+    document.getElementById("result").innerHTML =
+        `if-else Result: Your grade is <strong>${grade}</strong>`;
+}
+
+function gradeSwitch() {
+    const marks = parseInt(document.getElementById("marks").value);
+    let grade = "";
+
+    switch (Math.floor(marks / 10)) {
+        case 10:
+        case 9: grade = "A+"; break;
+        case 8: grade = "A"; break;
+        case 7: grade = "B"; break;
+        case 6: grade = "C"; break;
+        case 5: grade = "D"; break;
+        case 4:
+        case 3:
+        case 2:
+        case 1:
+        case 0: grade = "F"; break;
+        default: grade = "Invalid marks";
+    }
+
+    document.getElementById("result").innerHTML =
+        `switch Result: Your grade is <strong>${grade}</strong>`;
+}
+</script>
+
+</body>
+</html>

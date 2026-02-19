@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Array</title>
+<style>
+    * { margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
+
+    body {
+        background: #fdfaf6; 
+        color: #334155;
+        font-family: 'Inter', -apple-system, sans-serif;
+        padding: 60px 20px;
+        line-height: 1.6;
+    }
+
+    .container { 
+        max-width: 1000px; 
+        margin: 0 auto; }
+
+    h1 {
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 50px;
+        letter-spacing: -1px;
+        color: #1e293b;
+    }
+
+    section {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 40px; 
+        margin-bottom: 40px;
+        border: 1px solid #e2e8f0;
+        border-top: 10px solid #1e293b; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        position: relative;
+        overflow: hidden;
+    }
+
+    h2 {
+        color: #1e293b;
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+    }
+
+    .intro-box {
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 30px;
+        border: 1px solid #edf2f7;
+    }
+
+    .intro-badge {
+        background: rgba(56, 189, 248, 0.1);
+        color: #1e293b;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    .intro-text strong { color: #059669; }
+
+    .index-note {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #e2e8f0;
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+
+    .code-container {
+        background: #f1f5f9;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        margin: 20px 0;
+        overflow: hidden;
+    }
+
+    pre {
+        padding: 20px;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 0.95rem;
+        color: #1e293b;
+        overflow-x: auto;
+    }
+
+    .comment { color: #94a3b8; font-style: italic; }
+    .keyword { color: #be185d; font-weight: bold; }
+    .variable { color: #0369a1; }
+    .string { color: #059669; }
+    .method { color: #7c3aed; }
+
+    .table-container {
+        overflow-x: auto;
+        margin: 20px 0;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+    }
+
+    table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        background: #ffffff; 
+    }
+    th, td { 
+        padding: 15px 20px; 
+        text-align: left; 
+        border-bottom: 1px solid #f1f5f9; 
+    }
+    th { 
+        background-color: #f8fafc; 
+        color: #1e293b; 
+        font-size: 0.8rem; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+    }
+    td { font-size: 0.95rem; 
+        color: #475569; 
+    }
+    .example-txt { 
+        color: #1e293b; 
+        font-family: monospace; 
+        font-weight: bold; 
+    }
+
+    .summary-dashboard { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 20px; 
+        margin-top: 25px; 
+    }
+    .stat-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative;
+    }
+
+    .stat-label { 
+        font-size: 0.7rem; 
+        text-transform: uppercase; 
+        color: #1e293b; 
+        font-weight: 700; 
+        display: block; 
+        margin-bottom: 5px; 
+    }
+    .stat-value { 
+        font-size: 1rem; 
+        color: #334155; 
+    }
+    .stat-code { 
+        background: #f1f5f9; 
+        padding: 2px 6px; 
+        border-radius: 4px; 
+        color: #059669; 
+        font-family: monospace; 
+    }
+
+    .student-tool {
+        max-width: 500px;
+        margin: 80px auto;
+        background: #ffffff;
+        padding: 35px;
+        border-radius: 30px;
+        border: 1px solid #e2e8f0;
+        border-top: 10px solid #0f172a;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+        text-align: center;
+    }
+
+    .student-tool h1 {
+        color: #0f172a;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    .box input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #334155;
+        font-size: 15px;
+        outline: none;
+    }
+    
+    .box input:focus { border-color: #1e293b; }
+
+    .box button {
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        border: none;
+        background: #0f172a;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: 0.3s;
+    }
+
+    .box button:hover { 
+        background: #1e293b; 
+        transform: translateY(-2px); 
+    }
+
+    #studentList { 
+        list-style: none; 
+        padding: 0; 
+    }
+
+    #studentList li {
+        background: #f8fafc;
+        margin-bottom: 10px;
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: 1px solid #edf2f7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #334155;
+        font-weight: 500;
+    }
+
+    .delete {
+        background: #fee2e2;
+        color: #ef4444;
+        padding: 6px 14px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .delete:hover { background: #fecaca; }
+
+    @media (max-width: 768px) {
+        .summary-dashboard { grid-template-columns: 1fr; }
+        h1 { font-size: 2rem; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>JavaScript Array Guide</h1>
+
+    
+
+    <section>
+        <h2>1. What is an Array?</h2>
+        <div class="intro-box">
+            <span class="intro-badge">Definition</span>
+            <p class="intro-text">
+                An <strong>Array</strong> is a specialized object designed to store a collection of multiple values under a single variable name. Unlike standard variables, arrays are <strong>ordered</strong> and <strong>dynamically sized</strong>, allowing you to manage lists of data efficiently.
+            </p>
+            
+            <div class="index-note">
+                💡 <strong>Key Rule:</strong> Arrays use <strong>Zero-Based Indexing</strong>—the first item is always <code>[0]</code>.
+            </div>
+        </div>
+
+        <div class="code-container">
+            <pre><code><span class="comment">// Array creation</span>
+<span class="keyword">let</span> <span class="variable">fruits</span> = [<span class="string">"Apple"</span>, <span class="string">"Banana"</span>, <span class="string">"Mango"</span>];
+<span class="keyword">let</span> <span class="variable">numbers</span> = <span class="keyword">new</span> <span class="variable">Array</span>(1, 2, 3, 4, 5);
+
+<span class="comment">// Access elements</span>
+<span class="variable">console</span>.<span class="method">log</span>(<span class="variable">fruits</span>[0]); <span class="comment">// Apple</span>
+<span class="variable">console</span>.<span class="method">log</span>(<span class="variable">fruits</span>[<span class="variable">fruits</span>.length - 1]); <span class="comment">// Mango</span></code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Add / Remove Elements</h2>
+        
+        <p>Methods used to modify the contents of an array:</p>
+        
+        <div class="table-container">
+            <table>
+                <tr><th>Method</th><th>Description</th><th>Example</th></tr>
+                <tr><td><strong>push()</strong></td><td>Add to end</td><td><span class="example-txt">arr.push(3)</span></td></tr>
+                <tr><td><strong>pop()</strong></td><td>Remove last</td><td><span class="example-txt">arr.pop()</span></td></tr>
+                <tr><td><strong>unshift()</strong></td><td>Add to start</td><td><span class="example-txt">arr.unshift(1)</span></td></tr>
+                <tr><td><strong>shift()</strong></td><td>Remove first</td><td><span class="example-txt">arr.shift()</span></td></tr>
+                <tr><td><strong>splice()</strong></td><td>Remove/insert</td><td><span class="example-txt">arr.splice(2,1,10)</span></td></tr>
+                <tr><td><strong>slice()</strong></td><td>Copy portion</td><td><span class="example-txt">arr.slice(1,3)</span></td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Searching & Checking</h2>
+        <div class="table-container">
+            <table>
+                <tr><th>Method</th><th>Description</th><th>Example</th></tr>
+                <tr><td><strong>indexOf()</strong></td><td>First index found</td><td><span class="example-txt">arr.indexOf(2)</span></td></tr>
+                <tr><td><strong>includes()</strong></td><td>True/False check</td><td><span class="example-txt">arr.includes(2)</span></td></tr>
+                <tr><td><strong>find()</strong></td><td>Find first match</td><td><span class="example-txt">arr.find(n=>n>2)</span></td></tr>
+                <tr><td><strong>some()</strong></td><td>At least one match</td><td><span class="example-txt">arr.some(n=>n>2)</span></td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Transforming / Iterating</h2>
+        
+        <div class="table-container">
+            <table>
+                <tr><th>Method</th><th>Description</th><th>Result</th></tr>
+                <tr><td><strong>map()</strong></td><td>Transform each item</td><td><strong>New Array</strong></td></tr>
+                <tr><td><strong>filter()</strong></td><td>Select items by test</td><td><strong>New Array</strong></td></tr>
+                <tr><td><strong>reduce()</strong></td><td>Combine to one value</td><td><strong>Single Value</strong></td></tr>
+                <tr><td><strong>reverse()</strong></td><td>Flip order</td><td><strong>Modified Array</strong></td></tr>
+                <tr><td><strong>join()</strong></td><td>Convert to string</td><td><strong>String</strong></td></tr>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>5. Multi-dimensional Arrays</h2>
+        <p>Arrays containing other arrays (nested data):</p>
+        
+        <div class="code-container">
+            <pre><code><span class="keyword">let</span> <span class="variable">matrix</span> = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+<span class="variable">console</span>.<span class="method">log</span>(<span class="variable">matrix</span>[1][2]); <span class="comment">// 6 (Row index 1, Col index 2)</span></code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>6. Technical Summary</h2>
+        <div class="summary-dashboard">
+            <div class="stat-card">
+                <span class="stat-label">Indexing</span>
+                <span class="stat-value">Arrays are <span class="stat-code">0-indexed</span>. The length is <span class="stat-code">max_index + 1</span>.</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Memory</span>
+                <span class="stat-value">Dynamically sized. Modified via <span class="stat-code">push()</span> or <span class="stat-code">splice()</span>.</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Pure Functions</span>
+                <span class="stat-value"><span class="stat-code">map()</span> and <span class="stat-code">filter()</span> return new arrays (Immutable).</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Search</span>
+                <span class="stat-value">Use <span class="stat-code">includes()</span> for existence or <span class="stat-code">find()</span> for complex logic.</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="student-tool">
+    <h1>🎓 Student List Tool</h1>
+    <div class="box">
+        <input type="text" id="studentName" placeholder="Enter student name">
+        <button id="btn">Add Student</button>
+        <ul id="studentList"></ul>
+    </div>
+</div>
+
+<script>
+    let students = [];
+
+    const addStudents = document.getElementById("btn");
+    addStudents.addEventListener("click", addStudent);
+    
+    function addStudent() {
+        const input = document.getElementById("studentName");
+        const name = input.value.trim();
+
+        if (name === "") {
+            alert("Please enter student name");
+            return;
+        }
+
+        students.push(name); 
+        input.value = "";    
+        displayStudents();   
+    }
+
+    function deleteStudent(index) {
+        students.splice(index, 1); 
+        displayStudents();        
+    }
+
+    function displayStudents() {
+        const list = document.getElementById("studentList");
+        list.innerHTML = "";
+
+        students.forEach((student, index) => {
+            list.innerHTML += `
+                <li>
+                    <span>${index + 1}. ${student}</span>
+                    <span class="delete" onclick="deleteStudent(${index})">Delete</span>
+                </li>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>

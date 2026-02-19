@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Set and Map</title>
+
+    <style>
+        :root {
+            --bg: #fdfaf6;        
+            --card-bg: #ffffff;
+            --accent: #0284c7;      
+            --success: #059669;     
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+            --code-bg: #f1f5f9;
+        }
+
+        * { margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, sans-serif;
+            padding: 50px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border);
+            border-top: 10px solid var(--accent);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f172a;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 15px 0;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        ul {
+            margin: 20px 0 20px 25px;
+            list-style-type: none;
+        }
+
+        li {
+            margin: 10px 0;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: "✦";
+            position: absolute;
+            left: -25px;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .code {
+            background: var(--code-bg);
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            margin: 20px 0;
+            color: #1e293b;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow-x: auto;
+            font-size: 0.95rem;
+        }
+
+        pre { 
+            white-space: pre-wrap; 
+            margin: 0; 
+        }
+        .code span.keyword { 
+            color: #be185d; 
+            font-weight: bold; 
+        }
+        .code span.comment { 
+            color: #94a3b8; 
+            font-style: italic; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        td {
+            background-color: #ffffff;
+            color: var(--text-secondary);
+        }
+
+        .highlight {
+            background: #f0f9ff;
+            color: var(--accent);
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            border: 1px solid #e0f2fe;
+            text-align: center;
+        }
+
+        .tool-container {
+            max-width: 900px;
+            margin: 60px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            border-top: 10px solid #0f172a;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+        }
+
+        .tool-container h1 { 
+            color: #0f172a; 
+        }
+
+        .tool-container h2 {
+            color: var(--text-primary);
+            border-bottom: none;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .tool-container input {
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 15px;
+            width: 100%;
+            max-width: 300px;
+            background: #f8fafc;
+            outline: none;
+        }
+        
+        .tool-container input:focus { 
+            border-color: var(--accent); 
+        }
+
+        .tool-container button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-size: 15px;
+            background: #0f172a;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .tool-container button:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .output {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            white-space: pre-line;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 25px; }
+             h1 { font-size: 1.8rem; }
+            .tool-container input { max-width: 100%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>JavaScript Set and Map</h1>
+
+    
+
+    <h2>1. What is Set?</h2>
+    <p>
+        A <strong>Set</strong> is a JavaScript object that stores
+        <strong>only unique values</strong>. Duplicate values are
+        automatically removed.
+    </p>
+
+    <div class="code">
+        <pre><span class="keyword">let</span> numbers = <span class="keyword">new</span> Set([1, 2, 3, 2, 1]);
+console.log(numbers);
+<span class="comment">// Output: {1, 2, 3}</span></pre>
+    </div>
+
+    <h2>2. Set Creation</h2>
+    <div class="code">
+        <pre><span class="keyword">let</span> mySet = <span class="keyword">new</span> Set();
+
+<span class="keyword">let</span> fruits = <span class="keyword">new</span> Set(["Apple", "Banana", "Apple", "Mango"]);</pre>
+    </div>
+
+    <h2>3. Why Set is Used?</h2>
+    <ul>
+        <li>To store unique values</li>
+        <li>To remove duplicate data efficiently</li>
+        <li>Fast membership checking (searching)</li>
+    </ul>
+
+    <h2>4. Set Methods</h2>
+    <table>
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td><strong>add(value)</strong></td><td>Add value</td></tr>
+        <tr><td><strong>delete(value)</strong></td><td>Remove value</td></tr>
+        <tr><td><strong>has(value)</strong></td><td>Check value exists</td></tr>
+        <tr><td><strong>size</strong></td><td>Total values count</td></tr>
+        <tr><td><strong>clear()</strong></td><td>Remove all values</td></tr>
+    </table>
+
+    <div class="highlight">
+        ✨ Set is best for removing duplicate values from arrays
+    </div>
+
+    <h2>5. What is Map?</h2>
+    <p>
+        A <strong>Map</strong> stores data in <strong>key–value pairs</strong>. Unlike a standard object, keys in a Map can be of any data type.
+    </p>
+
+    
+
+    <p style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+        <strong>Conceptual Structure:</strong><br>
+        <span style="color: var(--accent);">"name"</span> → Rahul<br>
+        <span style="color: var(--accent);">"age"</span> → 21
+    </p>
+
+    <h2>6. Map Creation & Methods</h2>
+    <div class="code">
+        <pre><span class="keyword">let</span> student = <span class="keyword">new</span> Map();
+
+student.set("name", "Amit");
+student.set("age", 20);
+console.log(student.get("name")); <span class="comment">// Amit</span></pre>
+    </div>
+
+    <table>
+        <tr><th>Method</th><th>Description</th></tr>
+        <tr><td><strong>set(key, value)</strong></td><td>Add or update value</td></tr>
+        <tr><td><strong>get(key)</strong></td><td>Get value by key</td></tr>
+        <tr><td><strong>has(key)</strong></td><td>Check if key exists</td></tr>
+        <tr><td><strong>delete(key)</strong></td><td>Remove entry by key</td></tr>
+        <tr><td><strong>size</strong></td><td>Total entries count</td></tr>
+    </table>
+
+    <div class="highlight">
+        🚀 Map = High-performance key → value storage
+    </div>
+
+</div>
+
+<div class="tool-container">
+    <h1>Set & Map Practice Tool</h1>
+
+    <h2>🔢 Unique Numbers (Set)</h2>
+    <input type="number" id="numInput" placeholder="Enter number">
+    <button onclick="addNumber()">Add to Set</button>
+    <div class="output" id="uniqueNumbers">Unique Numbers: </div>
+
+    <br><hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;"><br>
+
+    <h2>🎓 Student Marks (Map)</h2>
+    <input type="text" id="studentName" placeholder="Student name">
+    <input type="number" id="studentMarks" placeholder="Marks">
+    <br>
+    <button onclick="addStudent()">Save to Map</button>
+    <div class="output" id="studentData">Student Marks Table:</div>
+</div>
+
+<script>
+    let uniqueSet = new Set();
+    let studentMap = new Map();
+
+    function addNumber() {
+        const num = document.getElementById("numInput").value;
+        if(num === "") return;
+        uniqueSet.add(Number(num));
+        document.getElementById("uniqueNumbers").innerText =
+            "Unique Numbers: " + [...uniqueSet].join(", ");
+        document.getElementById("numInput").value = "";
+    }
+
+    function addStudent() {
+        const name = document.getElementById("studentName").value.trim();
+        const marks = document.getElementById("studentMarks").value;
+        if(name === "" || marks === "") return;
+
+        studentMap.set(name, marks);
+
+        let text = "NAME \t\t MARKS\n";
+        text += "---------------------------\n";
+        studentMap.forEach((m, n) => {
+            text += `${n} \t\t ${m}\n`;
+        });
+
+        document.getElementById("studentData").innerText = text;
+        document.getElementById("studentName").value = "";
+        document.getElementById("studentMarks").value = "";
+    }
+</script>
+
+</body>
+</html>
